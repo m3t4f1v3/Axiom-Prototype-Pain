@@ -1,6 +1,6 @@
 package com.axiom.axiom_pain.mixin.balance;
 
-import net.adinvas.prototype_pain.PlayerHealthProvider;
+import net.adinvas.casualties_cubed.PlayerHealthProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +17,7 @@ public class TargetingConditionsMixin {
         if (target instanceof Player player) {
             // Access your capability
             player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent(cap -> {
-                if (cap.getContiousness() <= 10) {
+                if (cap.getConsciousness() <= 10) {
                     // Tell the AI this player is not a valid target
                     cir.setReturnValue(false);
                 }

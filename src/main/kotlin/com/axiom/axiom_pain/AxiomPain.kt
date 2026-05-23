@@ -6,8 +6,8 @@ import com.axiom.axiom_pain.init.AxiomParticles
 import com.axiom.axiom_pain.init.ItemRegistry
 import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
 import com.axiom.axiom_pain.moodles.AxiomMoodleController
-import net.adinvas.prototype_pain.item.INbtDrivenDurability
-import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
+import net.adinvas.casualties_cubed.item.api.INbtDrivenDurability
+import net.adinvas.casualties_cubed.item.multi_tank.MultiTankFluidItem
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.api.distmarker.Dist
@@ -61,7 +61,7 @@ object AxiomPain {
                 val stack: ItemStack = ItemStack(it.get())
 
 
-                (it.get() as? INbtDrivenDurability)?.setupDefaults(stack)
+                (it.get() as? INbtDrivenDurability)?.getNbtDurability(stack)
                 (it.get() as? MultiTankFluidItem)?.setupDefault(stack)
 
                 event.accept(stack)

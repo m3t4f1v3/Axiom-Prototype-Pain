@@ -1,8 +1,8 @@
 package com.axiom.axiom_pain.init
 
-import net.adinvas.prototype_pain.ModMedicalFluids
-import net.adinvas.prototype_pain.ModMedicalRegistry
-import net.adinvas.prototype_pain.fluid_system.MedicalFluid
+import net.adinvas.casualties_cubed.fluid_system.MedicalFluid
+import net.adinvas.casualties_cubed.registry.ModMedicalFluids
+import net.adinvas.casualties_cubed.registry.ModMedicalRegistry
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
 import java.util.function.Supplier

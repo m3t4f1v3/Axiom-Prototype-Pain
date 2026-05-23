@@ -5,8 +5,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import homeostatic.common.capabilities.ITemperature;
 import homeostatic.common.capabilities.TemperatureCapability;
 import homeostatic.util.TempHelper;
-import net.adinvas.prototype_pain.limbs.Limb;
-import net.adinvas.prototype_pain.limbs.PlayerHealthData;
+import net.adinvas.casualties_cubed.limbs.Limb;
+import net.adinvas.casualties_cubed.limbs.PlayerHealthData;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,7 +35,7 @@ public class PlayerHealthDataMixin {
 
     @WrapOperation(
             method = "handleFireDamage",
-            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyBleedDamage(Lnet/adinvas/prototype_pain/limbs/Limb;FLnet/minecraft/world/entity/player/Player;)V")
+            at = @At(value = "INVOKE", target = "Lnet/adinvas/casualties_cubed/limbs/PlayerHealthData;applyBleedDamage(Lnet/adinvas/casualties_cubed/limbs/Limb;FLnet/minecraft/world/entity/player/Player;)V")
             , remap = false)
     void applyBleedDamageFire(PlayerHealthData instance, Limb limb, float damage, Player player, Operation<Void> original) {
         return;

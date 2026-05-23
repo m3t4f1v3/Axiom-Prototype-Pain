@@ -2,36 +2,56 @@ package com.axiom.axiom_pain.items.repairkit
 
 import com.axiom.axiom_pain.mixin.robot.BandageObjectAccessor
 import com.mojang.math.Axis
-import net.adinvas.prototype_pain.client.gui.StatusSprites
-import net.adinvas.prototype_pain.client.gui.minigames.BandageMinigameScreen
-import net.adinvas.prototype_pain.client.gui.minigames.BandageObject
-import net.adinvas.prototype_pain.client.gui.minigames.HandObject
+import net.adinvas.casualties_cubed.client.gui.StatusSprites
+import net.adinvas.casualties_cubed.client.gui.minigames.BandageMinigameScreen
+import net.adinvas.casualties_cubed.client.gui.minigames.BandageObject
+import net.adinvas.casualties_cubed.client.gui.minigames.HandObject
+import net.adinvas.casualties_cubed.limbs.Limb
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import java.lang.reflect.Field
-import kotlin.math.abs
 
 
 class RepairKitMinigameScreen : BandageMinigameScreen {
+
+    private val hand: InteractionHand
+    private val slot: Int
 
     // Define your custom textures here
     private val EMPTY_ICON = ResourceLocation.fromNamespaceAndPath("axiom_pain", "textures/gui/empty.png")
     private val REPAIR_KIT = ResourceLocation.fromNamespaceAndPath("axiom_pain", "textures/gui/repair_kit.png")
 
     // Primary constructor
-    constructor(parent: Screen, target: Player, stack: ItemStack, limb: net.adinvas.prototype_pain.limbs.Limb, hand: InteractionHand)
-            : super(parent, target, stack, limb, hand)
+    constructor(
+        parent: Screen,
+        target: Player,
+        stack: ItemStack,
+        limb: Limb,
+        hand: InteractionHand,
+    ) : super(parent, target, stack, limb, hand) {
+        this.hand = hand
+        this.slot = -1
+    }
 
     // Secondary constructor (for bags)
-    constructor(parent: Screen, target: Player, stack: ItemStack, bagStack: ItemStack, slot: Int, limb: net.adinvas.prototype_pain.limbs.Limb, hand: InteractionHand)
-            : super(parent, target, stack, bagStack, slot, limb, hand)
+    constructor(
+        parent: Screen,
+        target: Player,
+        stack: ItemStack,
+        slot: Int,
+        limb: Limb,
+        hand: InteractionHand,
+    )
+            : super(parent, target, stack, slot, limb, hand) {
+        this.hand = hand
+        this.slot = slot
+    }
 
     override fun init() {
         super.init()
@@ -46,7 +66,9 @@ class RepairKitMinigameScreen : BandageMinigameScreen {
                 EMPTY_ICON, // Your custom icon
                 64, 64, 1.0f,
                 this.width / 2, this.height / 2,
-                this.itemStackFromParent // Helper property defined below
+                this.itemStackFromParent, // Helper property defined below
+                this.slot,
+                this.hand
             )
 
             field.set(this, newObject)
@@ -96,7 +118,7 @@ class RepairKitMinigameScreen : BandageMinigameScreen {
         if (bleedRate > 0.0f) {
             val bleedScale = 0.5f + 1.4f * (bleedRate / maxBleed)
             val sizePx = 20.0f * bleedScale
-            guiGraphics.blit(StatusSprites.BLEED.resourceLocation, (this.width / 2 - sizePx / 2f).toInt(), (this.height / 2 - sizePx / 2f + 10f).toInt(), 0f, 0f, sizePx.toInt(), sizePx.toInt(), sizePx.toInt(), sizePx.toInt())
+            guiGraphics.blit(StatusSprites.BLEED.tex, (this.width / 2 - sizePx / 2f).toInt(), (this.height / 2 - sizePx / 2f + 10f).toInt(), 0f, 0f, sizePx.toInt(), sizePx.toInt(), sizePx.toInt(), sizePx.toInt())
         }
 
         // Render the item icon in corner

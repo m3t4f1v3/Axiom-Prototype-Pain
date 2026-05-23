@@ -5,8 +5,8 @@ package com.axiom.axiom_pain.mixin.robot;
 import com.axiom.axiom_pain.AxiomPainConfig;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.adinvas.prototype_pain.client.gui.StatusSprites;
-import net.adinvas.prototype_pain.client.gui.SubSprite;
+import net.adinvas.casualties_cubed.client.gui.StatusSprites;
+import net.adinvas.casualties_cubed.client.gui.widget.SubSprite;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -52,9 +52,9 @@ public class SubSpriteMixin {
             return;
         }
 
-        if (this.txt.equals(StatusSprites.BLEED.getResourceLocation())) original.call(instance, ResourceLocation.fromNamespaceAndPath("axiom_pain",  "textures/gui/icons/oil.png"), p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
-        else if (this.txt.equals(StatusSprites.DISLOCATION.getResourceLocation())) original.call(instance, ResourceLocation.fromNamespaceAndPath("axiom_pain",  "textures/gui/icons/dislocation.png"), p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
-        else if (this.txt.equals(StatusSprites.FRACTURE.getResourceLocation())) original.call(instance, ResourceLocation.fromNamespaceAndPath("axiom_pain",  "textures/gui/icons/fracture.png"), p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
+        if (this.txt.equals(StatusSprites.BLEED.tex)) original.call(instance, ResourceLocation.fromNamespaceAndPath("axiom_pain",  "textures/gui/icons/oil.png"), p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
+        else if (this.txt.equals(StatusSprites.DISLOCATION.tex)) original.call(instance, ResourceLocation.fromNamespaceAndPath("axiom_pain",  "textures/gui/icons/dislocation.png"), p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
+        else if (this.txt.equals(StatusSprites.FRACTURE.tex)) original.call(instance, ResourceLocation.fromNamespaceAndPath("axiom_pain",  "textures/gui/icons/fracture.png"), p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
         else original.call(instance, p_283272_, p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
     }
 }

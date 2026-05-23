@@ -7,9 +7,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
-import net.adinvas.prototype_pain.limbs.Limb;
-import net.adinvas.prototype_pain.limbs.LimbStatistics;
-import net.adinvas.prototype_pain.limbs.PlayerHealthData;
+import net.adinvas.casualties_cubed.limbs.Limb;
+import net.adinvas.casualties_cubed.limbs.LimbStatistics;
+import net.adinvas.casualties_cubed.limbs.PlayerHealthData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -41,7 +41,7 @@ public abstract class PlayerHealthDataMixin {
     @Shadow
     private float drug_addition;
     @Shadow
-    private float dirtyness;
+    private float dirtiness;
 
 
     @Unique
@@ -65,15 +65,15 @@ public abstract class PlayerHealthDataMixin {
 
     @WrapOperation(
             method = "applyPenalties",
-            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"), remap = false)
+            at = @At(value = "INVOKE", target = "Lnet/adinvas/casualties_cubed/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"), remap = false)
     private void applyGunk(LivingEntity player, Attribute attribute, String name, double amount, AttributeModifier.Operation operation, Operation<Void> original) {
 
         double gunkReduction = 0.0;
         if (!isRobot) gunkReduction = 0.0;
-        else if (dirtyness > 80) gunkReduction = 0.05;
-        else if (dirtyness > 60) gunkReduction = 0.025;
-        else if (dirtyness > 40) gunkReduction = 0.0125;
-        else if (dirtyness > 20) gunkReduction = 0.0075;
+        else if (dirtiness > 80) gunkReduction = 0.05;
+        else if (dirtiness > 60) gunkReduction = 0.025;
+        else if (dirtiness > 40) gunkReduction = 0.0125;
+        else if (dirtiness > 20) gunkReduction = 0.0075;
 
         original.call(player, attribute, name, amount-gunkReduction, operation);
     }
@@ -102,9 +102,9 @@ public abstract class PlayerHealthDataMixin {
         return original.call();
     }
 
-    @WrapMethod(method = "setLimbDesinfected", remap = false)
+    @WrapMethod(method = "setLimbDisinfected", remap = false)
     public void setLimbDesinfected(Limb limb, float desinfection, Operation<Void> original) {
-        if (desinfection > 0) dirtyness = 0f;
+        if (desinfection > 0) dirtiness = 0f;
         if (!isRobot) original.call(limb, desinfection);
     }
 }

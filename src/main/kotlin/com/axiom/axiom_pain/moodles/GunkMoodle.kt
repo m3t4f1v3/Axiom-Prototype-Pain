@@ -1,10 +1,10 @@
 package com.axiom.axiom_pain.moodles
 
 import com.axiom.axiom_pain.AxiomPainConfig
-import net.adinvas.prototype_pain.PlayerHealthProvider
-import net.adinvas.prototype_pain.client.moodles.AbstractMoodleVisual
-import net.adinvas.prototype_pain.client.moodles.MoodleStatus
-import net.adinvas.prototype_pain.limbs.PlayerHealthData
+import net.adinvas.casualties_cubed.PlayerHealthProvider
+import net.adinvas.casualties_cubed.client.moodles.AbstractMoodleVisual
+import net.adinvas.casualties_cubed.client.moodles.MoodleStatus
+import net.adinvas.casualties_cubed.limbs.PlayerHealthData
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -29,11 +29,10 @@ class GunkMoodle : AbstractMoodleVisual() {
         }
     }
 
-    override fun renderIcon(ms: GuiGraphics, partialTicks: Float, x: Int, y: Int): ResourceLocation {
+    override fun renderIcon(ms: GuiGraphics, partialTicks: Float, x: Int, y: Int) {
         var tex = ResourceLocation.fromNamespaceAndPath("axiom_pain", "textures/gui/icons/gunkmoodle.png")
 
         ms.blit(tex, x, y, 0.0f, 0.0f, 16, 16, 16, 16)
-        return tex
     }
 
     override fun getTooltip(player: Player): MutableList<Component> {

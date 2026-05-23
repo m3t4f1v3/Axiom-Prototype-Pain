@@ -1,17 +1,15 @@
 package com.axiom.axiom_pain.items.repairkit
 
 import com.axiom.axiom_pain.AxiomPainConfig
-import net.adinvas.prototype_pain.PlayerHealthProvider
-import net.adinvas.prototype_pain.Util
-import net.adinvas.prototype_pain.item.IAllowInMedicbags
-import net.adinvas.prototype_pain.item.IMedicalMinigameUsable
-import net.adinvas.prototype_pain.item.INbtDrivenDurability
-import net.adinvas.prototype_pain.limbs.Limb
-import net.adinvas.prototype_pain.limbs.PlayerHealthData
-import net.minecraft.ChatFormatting
+import net.adinvas.casualties_cubed.PlayerHealthProvider
+import net.adinvas.casualties_cubed.item.api.IAllowInMedicBags
+import net.adinvas.casualties_cubed.item.api.IBandage
+import net.adinvas.casualties_cubed.item.api.IMedicalMinigameUsable
+import net.adinvas.casualties_cubed.item.api.INbtDrivenDurability
+import net.adinvas.casualties_cubed.limbs.Limb
+import net.adinvas.casualties_cubed.limbs.PlayerHealthData
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.Style
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
@@ -23,7 +21,8 @@ import net.minecraftforge.fml.DistExecutor
 import java.util.function.Supplier
 import kotlin.math.max
 
-class RepairKit(p_41383_: Properties) : Item(p_41383_), IMedicalMinigameUsable, IAllowInMedicbags, INbtDrivenDurability {
+class RepairKit(p_41383_: Properties) : Item(p_41383_), IMedicalMinigameUsable, IAllowInMedicBags,
+    INbtDrivenDurability, IBandage {
 
     override fun openMinigameScreen(target: Player, stack: ItemStack, p2: Limb?, hand: InteractionHand) {
         DistExecutor.unsafeRunWhenOn(
@@ -43,7 +42,7 @@ class RepairKit(p_41383_: Properties) : Item(p_41383_), IMedicalMinigameUsable, 
             Supplier { Runnable { openRepairKitMinigame(target, p2, bagStack, slot, p4!!, hand) } })
     }
 
-    override fun useMinigameAction(scalableAmount: Float, target: Player, limb: Limb?) {
+    override fun useBandageAction(scalableAmount: Float, target: Player, limb: Limb?) {
         if (!AxiomPainConfig.isRobot(target)) return
 
         target.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA)
@@ -64,22 +63,16 @@ class RepairKit(p_41383_: Properties) : Item(p_41383_), IMedicalMinigameUsable, 
         }
 
         fun openRepairKitMinigame(target: Player, stack: ItemStack, bagStack: ItemStack, slot: Int, limb: Limb, hand: InteractionHand) {
-            Minecraft.getInstance().setScreen(RepairKitMinigameScreen(Minecraft.getInstance().screen!!, target, stack, bagStack, slot, limb, hand))
+            Minecraft.getInstance().setScreen(RepairKitMinigameScreen(Minecraft.getInstance().screen!!, target, stack, slot, limb, hand))
         }
     }
 
     override fun getName(pStack: ItemStack): Component {
-        var finalcomp = super.getName(pStack)
-        val var10000 = Component.empty().append(finalcomp).append(Component.literal(" (").withStyle(ChatFormatting.GRAY))
-        val var10001 = this.getNbtDurabilityRatio(pStack)
-        finalcomp = var10000.append(Component.literal((var10001 * 100.0f).toInt().toString() + "%")
-            .withStyle(Style.EMPTY.withColor(Util.getRedToGreenColor(this.getNbtDurabilityRatio(pStack)))))
-            .append(Component.literal(")").withStyle(ChatFormatting.GRAY))
-        return finalcomp
+        return appendDurability(pStack, Component.empty().append(super.getName(pStack)))
     }
 
     override fun onCraftedBy(pStack: ItemStack, pLevel: Level, pPlayer: Player) {
-        this.setupDefaults(pStack)
+        this.getNbtDurability(pStack)
         super.onCraftedBy(pStack, pLevel, pPlayer)
     }
 }

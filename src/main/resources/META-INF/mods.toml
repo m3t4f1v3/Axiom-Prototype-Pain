@@ -27,9 +27,9 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.axiom_pain]]
-modId = "prototype_pain"
+modId = "casualties_cubed"
 mandatory = true
-versionRange = "[2.2.0,)"
+versionRange = "[1.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
 

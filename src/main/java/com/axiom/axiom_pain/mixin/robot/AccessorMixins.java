@@ -1,7 +1,7 @@
 package com.axiom.axiom_pain.mixin.robot;
 
-import net.adinvas.prototype_pain.client.gui.HealthScreen;
-import net.adinvas.prototype_pain.client.gui.minigames.*;
+import net.adinvas.casualties_cubed.client.gui.HealthScreen;
+import net.adinvas.casualties_cubed.client.gui.minigames.*;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;

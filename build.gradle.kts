@@ -129,10 +129,13 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     implementation("thedarkcolour:kotlinforforge:4.12.0")
     api(fg.deobf("curse.maven:blood-bits-984445:7353388"))
-    api(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
+    api(fg.deobf("curse.maven:casualties-cubed-1539563:8069964"))
     api(fg.deobf("maven.modrinth:homeostatic:1.20.1-2.9.16.2-FORGE"))
     api(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
     api(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))
+
+    // compileOnly(fg.deobf("com.github.thermodynamica:thermodynamica:0.4.1"))
+    // runtimeOnly(fg.deobf("com.github.thermodynamica:thermodynamica:0.4.1"))
 
     implementation("io.github.llamalad7:mixinextras-common:0.5.2")
     annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.2")

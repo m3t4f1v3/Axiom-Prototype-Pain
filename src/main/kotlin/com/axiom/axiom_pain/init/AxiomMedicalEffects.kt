@@ -1,10 +1,10 @@
 package com.axiom.axiom_pain.init
 
 import com.axiom.axiom_pain.AxiomPainConfig
-import net.adinvas.prototype_pain.PlayerHealthProvider
-import net.adinvas.prototype_pain.fluid_system.MedicalEffect
-import net.adinvas.prototype_pain.limbs.Limb
-import net.adinvas.prototype_pain.limbs.PlayerHealthData
+import net.adinvas.casualties_cubed.PlayerHealthProvider
+import net.adinvas.casualties_cubed.fluid_system.MedicalEffect
+import net.adinvas.casualties_cubed.limbs.Limb
+import net.adinvas.casualties_cubed.limbs.PlayerHealthData
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects

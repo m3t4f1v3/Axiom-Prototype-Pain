@@ -1,10 +1,9 @@
 package com.axiom.axiom_pain.items
 
 import com.axiom.axiom_pain.init.AxiomMedicalFluids
-import net.adinvas.prototype_pain.ModMedicalFluids
-import net.adinvas.prototype_pain.fluid_system.ModFluids
-import net.adinvas.prototype_pain.fluid_system.MultiTankHelper
-import net.adinvas.prototype_pain.item.multi_tank.SyringeItem
+import net.adinvas.casualties_cubed.fluid_system.ModFluids
+import net.adinvas.casualties_cubed.fluid_system.MultiTankHelper
+import net.adinvas.casualties_cubed.item.multi_tank.SyringeItem
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.fluids.FluidStack
 
