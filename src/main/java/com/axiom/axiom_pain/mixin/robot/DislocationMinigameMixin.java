@@ -49,9 +49,9 @@ public abstract class DislocationMinigameMixin extends Screen  {
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         guiGraphics.fill(0, 0, this.width, this.height, -2013265920);
         Minecraft mc = Minecraft.getInstance();
-        guiGraphics.drawCenteredString(mc.font, Component.translatable("prototype_pain.gui.dislocation_instruction1"), this.width / 2, 10, 16777215);
+        guiGraphics.drawCenteredString(mc.font, Component.translatable("casualties_cubed.gui.dislocation_instruction1"), this.width / 2, 10, 16777215);
         guiGraphics.drawCenteredString(mc.font, (int)this.boneObject.getFakeDislocation() + "%", this.width / 2, this.height / 6 + 175, 13369344);
-        guiGraphics.drawCenteredString(mc.font, Component.translatable("prototype_pain.gui.minigame_exit"), this.width / 2, this.height / 6 + 190, 16777215);
+        guiGraphics.drawCenteredString(mc.font, Component.translatable("casualties_cubed.gui.minigame_exit"), this.width / 2, this.height / 6 + 190, 16777215);
         guiGraphics.blit(new ResourceLocation("axiom_pain", "textures/gui/bone2.png"), this.width / 2 - 160, this.height / 2 - 40, 0.0F, 0.0F, 160, 80, 160, 80);
         guiGraphics.setColor(0.5F, 0.5F, 0.5F, 0.1F);
         guiGraphics.blit(new ResourceLocation("axiom_pain", "textures/gui/bone.png"), this.width / 2, this.height / 2 - 40, 0.0F, 0.0F, 160, 80, 160, 80);

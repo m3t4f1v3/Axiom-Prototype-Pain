@@ -95,7 +95,7 @@ class RepairKitMinigameScreen : BandageMinigameScreen {
         // Draw YOUR custom center texture
         val pose = guiGraphics.pose()
 
-        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath("prototype_pain", "textures/gui/bandage_center.png"), this.width / 2 - 40, this.height / 2 - 40, 0, 0.0f, 80.0f, 80, 80, 80, 80)
+        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath("casualties_cubed", "textures/gui/bandage_center.png"), this.width / 2 - 40, this.height / 2 - 40, 0, 0.0f, 80.0f, 80, 80, 80, 80)
 
         pose.pushPose()
         pose.translate(bandageObjectFromParent!!.x + 32f, bandageObjectFromParent!!.y + 32f, 0.0)
@@ -105,9 +105,9 @@ class RepairKitMinigameScreen : BandageMinigameScreen {
         pose.popPose()
 
         // Instructions (reusing parent translations or adding your own)
-        guiGraphics.drawCenteredString(mc.font, Component.translatable("prototype_pain.gui.repair_kit_instruction1"), this.width / 2, 10, 16777215)
-        guiGraphics.drawCenteredString(mc.font, Component.translatable("prototype_pain.gui.repair_kit_instruction2"), this.width / 2, 20, 16777215)
-        guiGraphics.drawCenteredString(mc.font, Component.translatable("prototype_pain.gui.minigame_exit"), this.width / 2, this.height / 6 + 190, 16777215)
+        guiGraphics.drawCenteredString(mc.font, Component.translatable("casualties_cubed.gui.repair_kit_instruction1"), this.width / 2, 10, 16777215)
+        guiGraphics.drawCenteredString(mc.font, Component.translatable("casualties_cubed.gui.repair_kit_instruction2"), this.width / 2, 20, 16777215)
+        guiGraphics.drawCenteredString(mc.font, Component.translatable("casualties_cubed.gui.minigame_exit"), this.width / 2, this.height / 6 + 190, 16777215)
 
         // Render the bandageObject (which we swapped in init)
         this.bandageObjectFromParent?.render(guiGraphics)

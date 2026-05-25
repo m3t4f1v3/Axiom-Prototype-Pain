@@ -3,7 +3,7 @@
   "item.axiom_pain.blood_bag": "Blood bag",
   "item.axiom_pain.oil_bag": "Oil bag",
   "item.axiom_pain.repair_kit": "Repair kit",
-  "medical_fluid.prototype_pain.blood.description": "Blood",
-  "medical_fluid.prototype_pain.oil.description": "Oil",
+  "medical_fluid.casualties_cubed.blood.description": "Blood",
+  "medical_fluid.casualties_cubed.oil.description": "Oil",
   "block.examplemod.example_block": "Example Block"
 }

@@ -56,7 +56,7 @@ object AxiomPain {
 
     fun buildContents(event: BuildCreativeModeTabContentsEvent) {
 
-        if (event.tabKey.location() == ResourceLocation.fromNamespaceAndPath("prototype_pain", "main")) {
+        if (event.tabKey.location() == ResourceLocation.fromNamespaceAndPath("casualties_cubed", "main")) {
             ItemRegistry.ITEMS.entries.forEach {
                 val stack: ItemStack = ItemStack(it.get())
 
