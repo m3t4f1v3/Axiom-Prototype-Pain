@@ -3,8 +3,8 @@ package com.axiom.axiom_pain.mixin.robot;
 import com.axiom.axiom_pain.AxiomPainConfig;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.adinvas.casualties_cubed.client.gui.minigames.BoneObject;
-import net.adinvas.casualties_cubed.client.gui.minigames.GrabObject;
+import net.zaharenko424.casualties_cubed.client.gui.minigames.BoneObject;
+import net.zaharenko424.casualties_cubed.client.gui.minigames.GrabObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
@@ -20,14 +20,14 @@ public abstract class BoneObjectMixin extends GrabObject {
 
     @WrapOperation(
             method = "<init>",
-            at = @At(value = "NEW", target = "(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;")
+            at = @At(value = "INVOKE", target = "Lnet/zaharenko424/casualties_cubed/CasualtiesCubed;resourceLoc(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;")
     )
-    private static ResourceLocation fuck(String p_135811_, String p_135812_, Operation<ResourceLocation> original) {
+    private static ResourceLocation fuck(String path, Operation<ResourceLocation> original) {
 
         Screen currentScreen = Minecraft.getInstance().screen;
         if (currentScreen instanceof DislocationScreenAccessor screenAccessor && AxiomPainConfig.INSTANCE.isRobot(screenAccessor.getPlayer()))
             return ResourceLocation.fromNamespaceAndPath("axiom_pain", "textures/gui/bone.png");
-        return original.call(p_135811_, p_135812_);
+        return original.call(path);
 
 
     }

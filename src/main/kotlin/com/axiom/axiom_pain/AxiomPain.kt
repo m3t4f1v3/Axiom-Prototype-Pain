@@ -5,9 +5,7 @@ import com.axiom.axiom_pain.init.AxiomParticleTypes
 import com.axiom.axiom_pain.init.AxiomParticles
 import com.axiom.axiom_pain.init.ItemRegistry
 import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
-import com.axiom.axiom_pain.moodles.AxiomMoodleController
-import net.adinvas.casualties_cubed.item.api.INbtDrivenDurability
-import net.adinvas.casualties_cubed.item.multi_tank.MultiTankFluidItem
+import net.zaharenko424.casualties_cubed.item.api.INbtDrivenDurability
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.api.distmarker.Dist
@@ -62,7 +60,6 @@ object AxiomPain {
 
 
                 (it.get() as? INbtDrivenDurability)?.getNbtDurability(stack)
-                (it.get() as? MultiTankFluidItem)?.setupDefault(stack)
 
                 event.accept(stack)
             }
@@ -73,7 +70,6 @@ object AxiomPain {
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LOGGER.log(Level.INFO, "Initializing client... with Axiom Pain!")
         MOD_BUS.addListener(::registerKeybindings)
-        AxiomMoodleController.register()
     }
 
     private fun onClientTick(event: TickEvent.ClientTickEvent) {

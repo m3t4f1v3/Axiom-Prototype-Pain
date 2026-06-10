@@ -1,22 +1,47 @@
 package com.axiom.axiom_pain.init
 
-import net.adinvas.casualties_cubed.fluid_system.MedicalFluid
-import net.adinvas.casualties_cubed.registry.ModMedicalFluids
-import net.adinvas.casualties_cubed.registry.ModMedicalRegistry
 import net.minecraftforge.eventbus.api.IEventBus
+import net.minecraftforge.fluids.FluidType
+import net.minecraftforge.fluids.ForgeFlowingFluid
 import net.minecraftforge.registries.DeferredRegister
-import java.util.function.Supplier
+import net.minecraftforge.registries.ForgeRegistries
+import net.minecraftforge.registries.RegistryObject
+import net.zaharenko424.casualties_cubed.fluid_system.MedicalFluid
+import net.zaharenko424.casualties_cubed.fluid_system.MedicalFluidType
+
 
 object AxiomMedicalFluids {
 
-    val MEDICAL_FLUIDS = DeferredRegister.create(ModMedicalRegistry.MEDICAL_FLUIDS_KEY, "axiom_pain")
+    val FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, "axiom_pain")
+    val FLUIDS = DeferredRegister.create(ForgeRegistries.Keys.FLUIDS, "axiom_pain")
 
-    val BLOOD = ModMedicalFluids.MEDICAL_FLUIDS.register("blood",
-        Supplier { MedicalFluid(AxiomMedicalEffects.BLOOD, 8192000) })
-    val OIL = ModMedicalFluids.MEDICAL_FLUIDS.register("oil", Supplier { MedicalFluid(AxiomMedicalEffects.OIL, 16) })
+    val BLOOD_TYPE: RegistryObject<FluidType?>? =
+        FLUID_TYPES.register("blood") { MedicalFluidType(FluidType.Properties.create(), 8192000) }
+
+    val BLOOD: RegistryObject<MedicalFluid?>? = FLUIDS.register(
+        "blood",
+        {
+            MedicalFluid(
+                ForgeFlowingFluid.Properties(AxiomMedicalFluids.BLOOD_TYPE, AxiomMedicalFluids.BLOOD, AxiomMedicalFluids.BLOOD),
+                AxiomMedicalEffects.BLOOD
+            )
+        })
+
+    val OIL_TYPE: RegistryObject<FluidType?>? =
+        FLUID_TYPES.register("oil") { MedicalFluidType(FluidType.Properties.create(), 16) }
+
+    val OIL: RegistryObject<MedicalFluid?>? = FLUIDS.register(
+        "oil",
+        {
+            MedicalFluid(
+                ForgeFlowingFluid.Properties(AxiomMedicalFluids.OIL_TYPE, AxiomMedicalFluids.OIL, AxiomMedicalFluids.OIL),
+                AxiomMedicalEffects.OIL
+            )
+        })
 
 
     fun register(bus: IEventBus?) {
-        ModMedicalFluids.MEDICAL_FLUIDS.register(bus)
+        FLUID_TYPES.register(bus)
+        FLUIDS.register(bus)
     }
 }

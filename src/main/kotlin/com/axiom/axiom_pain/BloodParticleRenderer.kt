@@ -1,7 +1,7 @@
 package com.axiom.axiom_pain // Ensure this matches your other files!
 
 import com.axiom.axiom_pain.init.AxiomParticleTypes
-import net.adinvas.casualties_cubed.PlayerHealthProvider
+import net.zaharenko424.casualties_cubed.PlayerHealthProvider
 import net.mcreator.bloodbits.init.BloodbitsModParticleTypes
 import net.minecraft.client.Minecraft
 import net.minecraftforge.event.TickEvent

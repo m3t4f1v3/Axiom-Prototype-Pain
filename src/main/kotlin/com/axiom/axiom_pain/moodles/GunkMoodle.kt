@@ -1,10 +1,10 @@
 package com.axiom.axiom_pain.moodles
 
 import com.axiom.axiom_pain.AxiomPainConfig
-import net.adinvas.casualties_cubed.PlayerHealthProvider
-import net.adinvas.casualties_cubed.client.moodles.AbstractMoodleVisual
-import net.adinvas.casualties_cubed.client.moodles.MoodleStatus
-import net.adinvas.casualties_cubed.limbs.PlayerHealthData
+import net.zaharenko424.casualties_cubed.PlayerHealthProvider
+import net.zaharenko424.casualties_cubed.client.moodles.AbstractMoodleVisual
+import net.zaharenko424.casualties_cubed.client.moodles.MoodleStatus
+import net.zaharenko424.casualties_cubed.limbs.PlayerHealthData
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.Component
@@ -16,7 +16,7 @@ class GunkMoodle : AbstractMoodleVisual() {
 
     override fun calculateStatus(player: Player): MoodleStatus {
         val dirtyness = player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA)
-            .map(NonNullFunction { obj: PlayerHealthData? -> obj!!.dirtyness }).orElse(0f) as Float
+            .map(NonNullFunction { obj: PlayerHealthData? -> obj!!.dirtiness }).orElse(0f) as Float
 
         if (!AxiomPainConfig.isRobot(player)) return MoodleStatus.NONE
 

@@ -1,6 +1,6 @@
 package com.axiom.axiom_pain.mixin.balance;
 
-import net.adinvas.casualties_cubed.PlayerHealthProvider;
+import net.zaharenko424.casualties_cubed.PlayerHealthProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;

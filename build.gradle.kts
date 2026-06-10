@@ -129,7 +129,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     implementation("thedarkcolour:kotlinforforge:4.12.0")
     api(fg.deobf("curse.maven:blood-bits-984445:7353388"))
-    api(fg.deobf("curse.maven:casualties-cubed-1539563:8069964"))
+    api(fg.deobf("curse.maven:casualties-cubed-1539563:8188152"))
     api(fg.deobf("maven.modrinth:homeostatic:1.20.1-2.9.16.2-FORGE"))
     api(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
     api(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))

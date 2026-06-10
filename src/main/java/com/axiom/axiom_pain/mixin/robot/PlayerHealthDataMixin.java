@@ -1,27 +1,23 @@
 package com.axiom.axiom_pain.mixin.robot;
 
-import com.axiom.axiom_pain.AxiomPain;
 import com.axiom.axiom_pain.AxiomPainConfig;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
-import net.adinvas.casualties_cubed.limbs.Limb;
-import net.adinvas.casualties_cubed.limbs.LimbStatistics;
-import net.adinvas.casualties_cubed.limbs.PlayerHealthData;
+import net.zaharenko424.casualties_cubed.limbs.Limb;
+import net.zaharenko424.casualties_cubed.limbs.LimbStatistics;
+import net.zaharenko424.casualties_cubed.limbs.PlayerHealthData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
@@ -39,7 +35,7 @@ public abstract class PlayerHealthDataMixin {
     @Shadow
     private float adrenaline;
     @Shadow
-    private float drug_addition;
+    private float drugAddition;
     @Shadow
     private float dirtiness;
 
@@ -53,7 +49,7 @@ public abstract class PlayerHealthDataMixin {
             this.totalPain = 0f;
             this.Opioids = 0f;
             this.adrenaline = 0f;
-            this.drug_addition = 0f;
+            this.drugAddition = 0f;
         }
     }
 
@@ -65,7 +61,7 @@ public abstract class PlayerHealthDataMixin {
 
     @WrapOperation(
             method = "applyPenalties",
-            at = @At(value = "INVOKE", target = "Lnet/adinvas/casualties_cubed/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"), remap = false)
+            at = @At(value = "INVOKE", target = "Lnet/zaharenko424/casualties_cubed/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"), remap = false)
     private void applyGunk(LivingEntity player, Attribute attribute, String name, double amount, AttributeModifier.Operation operation, Operation<Void> original) {
 
         double gunkReduction = 0.0;
@@ -84,27 +80,59 @@ public abstract class PlayerHealthDataMixin {
         isRobot = AxiomPainConfig.INSTANCE.isRobot(player);
     }
 
-    @WrapMethod(method = "getNORMAL_LIMB_HEAL_RATE", remap = false)
-    public float getNORMAL_LIMB_HEAL_RATE(Operation<Float> original) {
-        if (isRobot) return 0f;
-        return original.call();
+    @ModifyArg(
+            method = "UpdateLimb",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/zaharenko424/casualties_cubed/limbs/LimbStatistics;addSkinHealth(F)V"
+            ),
+            index = 0,
+            remap = false
+    )
+    private float modifySkinHealAmount(float amount) {
+        return isRobot ? 0.0F : amount;
     }
 
-    @WrapMethod(method = "getBOOSTED_LIMB_HEAL_RATE", remap = false)
-    public float getBOOSTED_LIMB_HEAL_RATE(Operation<Float> original) {
-        if (isRobot) return 0f;
-        return original.call();
+    @ModifyArg(
+            method = "UpdateLimb",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/zaharenko424/casualties_cubed/limbs/LimbStatistics;addMuscleHealth(F)V"
+            ),
+            index = 0,
+            remap = false
+    )
+    private float modifyMuscleHealAmount(float amount) {
+        return isRobot ? 0.0F : amount;
     }
 
-    @WrapMethod(method = "getINFECTION_CHANCE", remap = false)
-    public float getINFECTION_CHANCE(Operation<Float> original) {
-        if (isRobot) return 0f;
-        return original.call();
+    @WrapOperation(
+            method = "UpdateLimb",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/zaharenko424/casualties_cubed/limbs/LimbStatistics;addInfection(F)V"
+            ),
+            remap = false
+    )
+    private void applyInfection(LimbStatistics limbStats, float infection, Operation<Void> original) {
+        if (!isRobot) original.call(limbStats, infection);
     }
 
-    @WrapMethod(method = "setLimbDisinfected", remap = false)
-    public void setLimbDesinfected(Limb limb, float desinfection, Operation<Void> original) {
-        if (desinfection > 0) dirtiness = 0f;
-        if (!isRobot) original.call(limb, desinfection);
+    @WrapOperation(
+            method = "calculateInfectionAndSpread",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/zaharenko424/casualties_cubed/limbs/LimbStatistics;getDisinfectionTimer()F"
+            ),
+            remap = false
+    )
+    private float wrapDisinfectionTimer(
+            LimbStatistics stats,
+            Operation<Float> original) {
+        if (isRobot) {
+            dirtiness = 0.0F;
+            return 6.7F;
+        }
+        return original.call(stats);
     }
 }

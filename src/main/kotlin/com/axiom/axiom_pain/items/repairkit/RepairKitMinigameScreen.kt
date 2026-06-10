@@ -2,11 +2,11 @@ package com.axiom.axiom_pain.items.repairkit
 
 import com.axiom.axiom_pain.mixin.robot.BandageObjectAccessor
 import com.mojang.math.Axis
-import net.adinvas.casualties_cubed.client.gui.StatusSprites
-import net.adinvas.casualties_cubed.client.gui.minigames.BandageMinigameScreen
-import net.adinvas.casualties_cubed.client.gui.minigames.BandageObject
-import net.adinvas.casualties_cubed.client.gui.minigames.HandObject
-import net.adinvas.casualties_cubed.limbs.Limb
+import net.zaharenko424.casualties_cubed.client.gui.StatusSprites
+import net.zaharenko424.casualties_cubed.client.gui.minigames.BandageMinigameScreen
+import net.zaharenko424.casualties_cubed.client.gui.minigames.BandageObject
+import net.zaharenko424.casualties_cubed.client.gui.minigames.HandObject
+import net.zaharenko424.casualties_cubed.limbs.Limb
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.Screen
