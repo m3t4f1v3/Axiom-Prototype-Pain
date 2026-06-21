@@ -33,7 +33,10 @@
     "robot.InjectScreenAccessor",
     "robot.MoodleControllerMixin",
     "robot.ShrapnelScreenAccessor",
-    "robot.SubSpriteMixin"
+    "robot.SubSpriteMixin",
+    "epicfight.PPlayerRendererMixin",
+    "epicfight.BasicAttackMixin",
+    "epicfight.FirstPersonRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

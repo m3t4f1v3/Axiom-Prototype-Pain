@@ -133,6 +133,7 @@ dependencies {
     api(fg.deobf("maven.modrinth:homeostatic:1.20.1-2.9.16.2-FORGE"))
     api(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
     api(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))
+    api(fg.deobf("maven.modrinth:epic-fight:20.14.17-mc1.20.1-forge"))
 
     // compileOnly(fg.deobf("com.github.thermodynamica:thermodynamica:0.4.1"))
     // runtimeOnly(fg.deobf("com.github.thermodynamica:thermodynamica:0.4.1"))
